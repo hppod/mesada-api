@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-router.use('/family', require('./family'))
-router.use('/person', require('./person'))
+router.post('', require('../../services/person/create'))
 
 module.exports = router
