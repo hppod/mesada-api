@@ -1,6 +1,6 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable('taskexecution', {
+        return queryInterface.createTable('taskexecutions', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -11,7 +11,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'person',
+                    model: 'persons',
                     key: 'id'
                 }
             },
@@ -19,7 +19,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'task',
+                    model: 'tasks',
                     key: 'id'
                 }
             },
@@ -27,7 +27,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'period',
+                    model: 'periods',
                     key: 'id'
                 }
             },
@@ -55,6 +55,6 @@ module.exports = {
     },
 
     down: async (queryInterface) => {
-        return queryInterface.dropTable('taskexecution')
+        return queryInterface.dropTable('taskexecutions')
     }
 };

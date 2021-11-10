@@ -1,6 +1,6 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable('family', {
+        return queryInterface.createTable('families', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -30,6 +30,6 @@ module.exports = {
     },
 
     down: async (queryInterface) => {
-        return queryInterface.dropTable('family')
+        return queryInterface.dropTable('families')
     }
 };

@@ -1,6 +1,6 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable('task', {
+        return queryInterface.createTable('tasks', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -11,7 +11,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'tasksetting',
+                    model: 'tasksettings',
                     key: 'id'
                 }
             },
@@ -48,6 +48,6 @@ module.exports = {
     },
 
     down: async (queryInterface) => {
-        return queryInterface.dropTable('task')
+        return queryInterface.dropTable('tasks')
     }
 };

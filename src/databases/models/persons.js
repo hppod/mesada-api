@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('tasksetting', {
+  return sequelize.define('persons', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -11,40 +11,47 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'family',
+        model: 'families',
         key: 'id'
       }
     },
-    start: {
+    name: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    nickname: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    birthday: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    finish: {
-      type: DataTypes.DATE,
-      allowNull: true
+    type: {
+      type: DataTypes.ENUM('admin','player'),
+      allowNull: false
     },
-    baseValue: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 1
+    mail: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
-    replaceBaseValue: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: 0
-    },
-    minimumReplacementValue: {
-      type: DataTypes.DOUBLE,
+    password: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     isActive: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: 1
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     sequelize,
-    tableName: 'tasksetting',
+    tableName: 'persons',
     timestamps: true,
     indexes: [
       {

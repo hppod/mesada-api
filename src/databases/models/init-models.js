@@ -1,49 +1,49 @@
 var DataTypes = require("sequelize").DataTypes;
-var _family = require("./family");
-var _period = require("./period");
-var _person = require("./person");
+var _families = require("./families");
+var _periods = require("./periods");
+var _persons = require("./persons");
 var _sequelizemeta = require("./sequelizemeta");
-var _task = require("./task");
-var _taskexecution = require("./taskexecution");
-var _tasksetting = require("./tasksetting");
-var _tasksettingperson = require("./tasksettingperson");
+var _taskexecutions = require("./taskexecutions");
+var _tasks = require("./tasks");
+var _tasksettingpersons = require("./tasksettingpersons");
+var _tasksettings = require("./tasksettings");
 
 function initModels(sequelize) {
-  var family = _family(sequelize, DataTypes);
-  var period = _period(sequelize, DataTypes);
-  var person = _person(sequelize, DataTypes);
+  var families = _families(sequelize, DataTypes);
+  var periods = _periods(sequelize, DataTypes);
+  var persons = _persons(sequelize, DataTypes);
   var sequelizemeta = _sequelizemeta(sequelize, DataTypes);
-  var task = _task(sequelize, DataTypes);
-  var taskexecution = _taskexecution(sequelize, DataTypes);
-  var tasksetting = _tasksetting(sequelize, DataTypes);
-  var tasksettingperson = _tasksettingperson(sequelize, DataTypes);
+  var taskexecutions = _taskexecutions(sequelize, DataTypes);
+  var tasks = _tasks(sequelize, DataTypes);
+  var tasksettingpersons = _tasksettingpersons(sequelize, DataTypes);
+  var tasksettings = _tasksettings(sequelize, DataTypes);
 
-  person.belongsTo(family, { as: "family", foreignKey: "familyId"});
-  family.hasMany(person, { as: "people", foreignKey: "familyId"});
-  tasksetting.belongsTo(family, { as: "family", foreignKey: "familyId"});
-  family.hasMany(tasksetting, { as: "tasksettings", foreignKey: "familyId"});
-  taskexecution.belongsTo(period, { as: "period", foreignKey: "periodId"});
-  period.hasMany(taskexecution, { as: "taskexecutions", foreignKey: "periodId"});
-  taskexecution.belongsTo(person, { as: "person", foreignKey: "personId"});
-  person.hasMany(taskexecution, { as: "taskexecutions", foreignKey: "personId"});
-  tasksettingperson.belongsTo(person, { as: "person", foreignKey: "personId"});
-  person.hasMany(tasksettingperson, { as: "tasksettingpeople", foreignKey: "personId"});
-  taskexecution.belongsTo(task, { as: "task", foreignKey: "taskId"});
-  task.hasMany(taskexecution, { as: "taskexecutions", foreignKey: "taskId"});
-  task.belongsTo(tasksetting, { as: "taskSetting", foreignKey: "taskSettingId"});
-  tasksetting.hasMany(task, { as: "tasks", foreignKey: "taskSettingId"});
-  period.belongsTo(tasksettingperson, { as: "taskSetting", foreignKey: "taskSettingId"});
-  tasksettingperson.hasMany(period, { as: "periods", foreignKey: "taskSettingId"});
+  persons.belongsTo(families, { as: "family", foreignKey: "familyId"});
+  families.hasMany(persons, { as: "people", foreignKey: "familyId"});
+  tasksettings.belongsTo(families, { as: "family", foreignKey: "familyId"});
+  families.hasMany(tasksettings, { as: "tasksettings", foreignKey: "familyId"});
+  taskexecutions.belongsTo(periods, { as: "period", foreignKey: "periodId"});
+  periods.hasMany(taskexecutions, { as: "taskexecutions", foreignKey: "periodId"});
+  taskexecutions.belongsTo(persons, { as: "person", foreignKey: "personId"});
+  persons.hasMany(taskexecutions, { as: "taskexecutions", foreignKey: "personId"});
+  tasksettingpersons.belongsTo(persons, { as: "person", foreignKey: "personId"});
+  persons.hasMany(tasksettingpersons, { as: "tasksettingpeople", foreignKey: "personId"});
+  taskexecutions.belongsTo(tasks, { as: "task", foreignKey: "taskId"});
+  tasks.hasMany(taskexecutions, { as: "taskexecutions", foreignKey: "taskId"});
+  periods.belongsTo(tasksettingpersons, { as: "taskSetting", foreignKey: "taskSettingId"});
+  tasksettingpersons.hasMany(periods, { as: "periods", foreignKey: "taskSettingId"});
+  tasks.belongsTo(tasksettings, { as: "taskSetting", foreignKey: "taskSettingId"});
+  tasksettings.hasMany(tasks, { as: "tasks", foreignKey: "taskSettingId"});
 
   return {
-    family,
-    period,
-    person,
+    families,
+    periods,
+    persons,
     sequelizemeta,
-    task,
-    taskexecution,
-    tasksetting,
-    tasksettingperson,
+    taskexecutions,
+    tasks,
+    tasksettingpersons,
+    tasksettings,
   };
 }
 module.exports = initModels;

@@ -1,32 +1,41 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('task', {
+  return sequelize.define('tasksettings', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    taskSettingId: {
+    familyId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'tasksetting',
+        model: 'families',
         key: 'id'
       }
     },
-    description: {
-      type: DataTypes.STRING(255),
+    start: {
+      type: DataTypes.DATE,
       allowNull: false
     },
-    value: {
+    finish: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    baseValue: {
       type: DataTypes.DOUBLE,
-      allowNull: false
-    },
-    difficultyLevel: {
-      type: DataTypes.ENUM('easy','medium','hard'),
       allowNull: false,
-      defaultValue: "easy"
+      defaultValue: 1
+    },
+    replaceBaseValue: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
+    minimumReplacementValue: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
     },
     isActive: {
       type: DataTypes.BOOLEAN,
@@ -35,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'task',
+    tableName: 'tasksettings',
     timestamps: true,
     indexes: [
       {
@@ -47,10 +56,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "taskSettingId",
+        name: "familyId",
         using: "BTREE",
         fields: [
-          { name: "taskSettingId" },
+          { name: "familyId" },
         ]
       },
     ]

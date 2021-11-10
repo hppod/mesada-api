@@ -1,48 +1,40 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('taskexecution', {
+  return sequelize.define('periods', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    personId: {
+    taskSettingId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'person',
+        model: 'tasksettingpersons',
         key: 'id'
       }
     },
-    taskId: {
+    month: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'task',
-        key: 'id'
-      }
-    },
-    periodId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'period',
-        key: 'id'
-      }
-    },
-    date: {
-      type: DataTypes.DATE,
       allowNull: false
     },
-    executed: {
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    finished: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: 0
+    },
+    amount: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'taskexecution',
+    tableName: 'periods',
     timestamps: true,
     indexes: [
       {
@@ -54,24 +46,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "personId",
+        name: "taskSettingId",
         using: "BTREE",
         fields: [
-          { name: "personId" },
-        ]
-      },
-      {
-        name: "taskId",
-        using: "BTREE",
-        fields: [
-          { name: "taskId" },
-        ]
-      },
-      {
-        name: "periodId",
-        using: "BTREE",
-        fields: [
-          { name: "periodId" },
+          { name: "taskSettingId" },
         ]
       },
     ]

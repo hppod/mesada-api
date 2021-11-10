@@ -1,4 +1,4 @@
-const { Family: Families } = require('../databases/models')
+const { Families } = require('../databases/models')
 
 class Family {
 
