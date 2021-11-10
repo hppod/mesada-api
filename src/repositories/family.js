@@ -1,9 +1,9 @@
-const { Families } = require('../databases/models')
+const { families } = require('../databases/models')
 
 class Family {
 
     create(data) {
-        return Families.create(data)
+        return families.create(data)
     }
 }
 
